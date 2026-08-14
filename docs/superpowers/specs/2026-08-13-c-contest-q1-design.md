@@ -1,8 +1,8 @@
 # C Contest Q1 Design Specification
 
-## Scope And Gate
+## Scope And Delivery Mode
 
-This specification implements only Question 1: historical analysis, pre-match feature construction, television audience prediction, and the two required CSV files. Question 2 is out of scope. After Q1 verification, work stops at a result-review gate until the user explicitly accepts the model or requests another Q1 modeling iteration.
+This specification implements only Question 1: historical analysis, pre-match feature construction, television audience prediction, and the two required CSV files. The first deliverable is a complete runnable Demo with valid data contracts, leakage controls, temporal evaluation, a baseline model, and both required outputs. It is an iteration baseline, not a claim of optimality. Once a frozen Q1 artifact exists, later contest questions may consume that version while Q1 improvements remain versioned and traceable. COPT is not relevant to Q1's supervised prediction model; its required contest role begins with Q2 optimization and is documented in the project working rules.
 
 ## Authoritative Inputs
 
@@ -50,8 +50,6 @@ All A/B team aggregates are symmetric because A/B does not denote home/away.
 ### Direct contextual features
 
 - `competition` and `stage`: broadcast audience differs systematically by tournament and elimination importance.
-- `neutral`: venue neutrality can alter supporter access and match salience.
-- calendar year and month: capture broad temporal and seasonal demand without identifying individual rows.
 
 ### Team-strength features
 
@@ -74,15 +72,15 @@ All A/B team aggregates are symmetric because A/B does not denote home/away.
 ### Structural features
 
 - `same_confederation`: regional familiarity and rivalry.
-- `same_timezone_region`: broadcast convenience for overlapping audiences.
-- `host_involved`: host participation generally raises local and international attention.
+- `confederation_pair`: preserves the interpretable geographic matchup while treating A/B symmetrically.
+- `timezone_region_pair`: represents whether the two supporter markets occupy similar or different broadcast regions without inventing a kickoff time.
 
 ### Limited interactions
 
 - `fan_sum_world_cup`: World Cup exposure amplifies the supporter-base effect.
 - `elo_mean_entropy`: high-quality, uncertain matches combine quality and suspense.
 
-No target-derived rolling feature is in the first Q1 run. It may be proposed at the review gate only if diagnostics show a clear missing temporal signal, and then it must use strict `source_date < current_date` logic with same-date grouping.
+No target-derived rolling feature, match-result form feature, current-match `neutral` flag, host flag, or calendar feature is in the first Q1 run. The 72 future rows do not supply an equivalent date or neutral/host definition, so using these fields would break the deployment contract. Historical-state features may be proposed at the review gate only if diagnostics show a clear missing signal; any such feature must use strict `source_date < current_date` logic with same-date grouping and a separately approved rationale.
 
 ## Validation Protocol
 
@@ -138,7 +136,6 @@ Required output files:
 
 Both are generated from the official templates, joined by identifiers, and independently reloaded for validation.
 
-## Q1 Stop Gate
+## Q1 Iteration Gate
 
-Q1 is ready for user review only when the full local reproduction command succeeds and the result package contains the candidate leaderboard, lockbox evidence, diagnostic plots, feature rationales, CSV validation report, and known limitations. At that point work stops. The next permitted action is either another Q1 experiment requested after reviewing evidence or explicit acceptance of Q1. Q2 must not begin automatically.
-
+The Q1 Demo is ready for review when the full local reproduction command succeeds and the result package contains a baseline comparison, temporal evidence, feature rationales, CSV validation report, and known limitations. The result is then frozen as a versioned upstream artifact. Work may continue to later questions using that version; subsequent Q1 experiments must publish a new version, its comparative evidence, and any downstream impact.

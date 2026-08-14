@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=75", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "c-contest-modeling"
+version = "0.1.0"
+description = "Reproducible Q1-Q4 modeling pipeline for the 2026 Celian Cup C problem"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "numpy>=2.0",
+  "pandas>=2.2",
+  "openpyxl>=3.1",
+  "scikit-learn>=1.6",
+  "matplotlib>=3.9",
+  "seaborn>=0.13",
+  "joblib>=1.4",
+  "PyYAML>=6.0",
+]
+
+[project.optional-dependencies]
+models = [
+  "catboost>=1.2.8",
+  "lightgbm>=4.6",
+  "xgboost>=3.0",
+  "optuna>=4.4",
+  "shap>=0.48",
+]
+test = ["pytest>=8.3", "pytest-cov>=6.0"]
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+addopts = "-ra"
+testpaths = ["tests"]

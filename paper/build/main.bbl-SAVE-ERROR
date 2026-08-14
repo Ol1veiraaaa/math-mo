@@ -1,0 +1,290 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.3 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{none/global//global/global/global}
+    \entry{hoerl1970ridge}{article}{}{}
+      \name{author}{2}{}{%
+        {{hash=073bf156684ab93b481fb9a5dd6a82c7}{%
+           family={Hoerl},
+           familyi={H\bibinitperiod},
+           given={Arthur\bibnamedelima E.},
+           giveni={A\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=39f4e06a9e51f345e243e2b24175e7e4}{%
+           family={Kennard},
+           familyi={K\bibinitperiod},
+           given={Robert\bibnamedelima W.},
+           giveni={R\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \name{namea}{2}{}{%
+        {{hash=073bf156684ab93b481fb9a5dd6a82c7}{%
+           family={Hoerl},
+           familyi={H\bibinitperiod},
+           given={Arthur\bibnamedelima E.},
+           giveni={A\bibinitperiod\bibinitdelim E\bibinitperiod}}}%
+        {{hash=39f4e06a9e51f345e243e2b24175e7e4}{%
+           family={Kennard},
+           familyi={K\bibinitperiod},
+           given={Robert\bibnamedelima W.},
+           giveni={R\bibinitperiod\bibinitdelim W\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \strng{namehash}{b97ec9aa217e20891d66847c4a4a9eae}
+      \strng{fullhash}{5ca383125b65b015cb46067f1150f462}
+      \strng{fullhashraw}{5ca383125b65b015cb46067f1150f462}
+      \strng{bibnamehash}{5ca383125b65b015cb46067f1150f462}
+      \strng{authorbibnamehash}{5ca383125b65b015cb46067f1150f462}
+      \strng{authornamehash}{b97ec9aa217e20891d66847c4a4a9eae}
+      \strng{authorfullhash}{5ca383125b65b015cb46067f1150f462}
+      \strng{authorfullhashraw}{5ca383125b65b015cb46067f1150f462}
+      \strng{nameabibnamehash}{5ca383125b65b015cb46067f1150f462}
+      \strng{nameanamehash}{b97ec9aa217e20891d66847c4a4a9eae}
+      \strng{nameafullhash}{5ca383125b65b015cb46067f1150f462}
+      \strng{nameafullhashraw}{5ca383125b65b015cb46067f1150f462}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Technometrics}
+      \field{langid}{english}
+      \field{languageid}{english}
+      \field{lansortorder}{4}
+      \field{number}{1}
+      \field{title}{Ridge Regression: Biased Estimation for Nonorthogonal Problems}
+      \field{usera}{J}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{volume}{12}
+      \field{year}{1970}
+      \field{dateera}{ce}
+      \field{pages}{55\bibrangedash 67}
+      \range{pages}{13}
+      \keyw{hoerl1970ridge}
+    \endentry
+    \entry{copt2026}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=9e2374fc1bdd531229b37ecfda916063}{%
+           family={{杉数科技}},
+           familyi={杉\bibinitperiod}}}%
+      }
+      \name{namea}{1}{}{%
+        {{hash=9e2374fc1bdd531229b37ecfda916063}{%
+           family={{杉数科技}},
+           familyi={杉\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {chinese}%
+      }
+      \strng{namehash}{9e2374fc1bdd531229b37ecfda916063}
+      \strng{fullhash}{9e2374fc1bdd531229b37ecfda916063}
+      \strng{fullhashraw}{9e2374fc1bdd531229b37ecfda916063}
+      \strng{bibnamehash}{9e2374fc1bdd531229b37ecfda916063}
+      \strng{authorbibnamehash}{9e2374fc1bdd531229b37ecfda916063}
+      \strng{authornamehash}{9e2374fc1bdd531229b37ecfda916063}
+      \strng{authorfullhash}{9e2374fc1bdd531229b37ecfda916063}
+      \strng{authorfullhashraw}{9e2374fc1bdd531229b37ecfda916063}
+      \strng{nameabibnamehash}{9e2374fc1bdd531229b37ecfda916063}
+      \strng{nameanamehash}{9e2374fc1bdd531229b37ecfda916063}
+      \strng{nameafullhash}{9e2374fc1bdd531229b37ecfda916063}
+      \strng{nameafullhashraw}{9e2374fc1bdd531229b37ecfda916063}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{Cardinal Optimizer 软件及本地求解日志}
+      \field{langid}{english}
+      \field{languageid}{chinese}
+      \field{lansortorder}{1}
+      \field{note}{访问日期：2026-08-14}
+      \field{title}{COPT 求解器 8.0.6}
+      \field{usera}{Z}
+      \field{userd}{chinese}
+      \field{userf}{chinese}
+      \field{year}{2026}
+      \field{dateera}{ce}
+      \keyw{copt2026}
+    \endentry
+    \entry{saltelli2008sensitivity}{book}{}{}
+      \name{author}{8}{}{%
+        {{hash=40222053beb161f856f5eea1c63522f9}{%
+           family={Saltelli},
+           familyi={S\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod}}}%
+        {{hash=6ca2956f7c035175028804cc31f1791b}{%
+           family={Ratto},
+           familyi={R\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+        {{hash=305f209d4eae4ab5cd3860690548224f}{%
+           family={Andres},
+           familyi={A\bibinitperiod},
+           given={Terry},
+           giveni={T\bibinitperiod}}}%
+        {{hash=f0ea0d2b6145cbab09a9668234d4d631}{%
+           family={Campolongo},
+           familyi={C\bibinitperiod},
+           given={Francesca},
+           giveni={F\bibinitperiod}}}%
+        {{hash=6efaf6e815c0bad27598ad35e5ef5954}{%
+           family={Cariboni},
+           familyi={C\bibinitperiod},
+           given={Jessica},
+           giveni={J\bibinitperiod}}}%
+        {{hash=0a3e8f736f02c0e5b1527d6fad6ea85c}{%
+           family={Gatelli},
+           familyi={G\bibinitperiod},
+           given={Debora},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d8200fbc87a3aef4ebf2782705607b41}{%
+           family={Saisana},
+           familyi={S\bibinitperiod},
+           given={Michaela},
+           giveni={M\bibinitperiod}}}%
+        {{hash=31a88c2ce810172e651132ba1ae0cd6c}{%
+           family={Tarantola},
+           familyi={T\bibinitperiod},
+           given={Stefano},
+           giveni={S\bibinitperiod}}}%
+      }
+      \name{namea}{8}{}{%
+        {{hash=40222053beb161f856f5eea1c63522f9}{%
+           family={Saltelli},
+           familyi={S\bibinitperiod},
+           given={Andrea},
+           giveni={A\bibinitperiod}}}%
+        {{hash=6ca2956f7c035175028804cc31f1791b}{%
+           family={Ratto},
+           familyi={R\bibinitperiod},
+           given={Marco},
+           giveni={M\bibinitperiod}}}%
+        {{hash=305f209d4eae4ab5cd3860690548224f}{%
+           family={Andres},
+           familyi={A\bibinitperiod},
+           given={Terry},
+           giveni={T\bibinitperiod}}}%
+        {{hash=f0ea0d2b6145cbab09a9668234d4d631}{%
+           family={Campolongo},
+           familyi={C\bibinitperiod},
+           given={Francesca},
+           giveni={F\bibinitperiod}}}%
+        {{hash=6efaf6e815c0bad27598ad35e5ef5954}{%
+           family={Cariboni},
+           familyi={C\bibinitperiod},
+           given={Jessica},
+           giveni={J\bibinitperiod}}}%
+        {{hash=0a3e8f736f02c0e5b1527d6fad6ea85c}{%
+           family={Gatelli},
+           familyi={G\bibinitperiod},
+           given={Debora},
+           giveni={D\bibinitperiod}}}%
+        {{hash=d8200fbc87a3aef4ebf2782705607b41}{%
+           family={Saisana},
+           familyi={S\bibinitperiod},
+           given={Michaela},
+           giveni={M\bibinitperiod}}}%
+        {{hash=31a88c2ce810172e651132ba1ae0cd6c}{%
+           family={Tarantola},
+           familyi={T\bibinitperiod},
+           given={Stefano},
+           giveni={S\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \list{publisher}{2}{%
+        {John Wiley}%
+        {Sons}%
+      }
+      \strng{namehash}{6bf91641f4c7b586ec8db024e8a3b0fe}
+      \strng{fullhash}{235875793bafff86c4905900499e7fe5}
+      \strng{fullhashraw}{235875793bafff86c4905900499e7fe5}
+      \strng{bibnamehash}{235875793bafff86c4905900499e7fe5}
+      \strng{authorbibnamehash}{235875793bafff86c4905900499e7fe5}
+      \strng{authornamehash}{6bf91641f4c7b586ec8db024e8a3b0fe}
+      \strng{authorfullhash}{235875793bafff86c4905900499e7fe5}
+      \strng{authorfullhashraw}{235875793bafff86c4905900499e7fe5}
+      \strng{nameabibnamehash}{235875793bafff86c4905900499e7fe5}
+      \strng{nameanamehash}{6bf91641f4c7b586ec8db024e8a3b0fe}
+      \strng{nameafullhash}{235875793bafff86c4905900499e7fe5}
+      \strng{nameafullhashraw}{235875793bafff86c4905900499e7fe5}
+      \field{sortinit}{3}
+      \field{sortinithash}{ad6fe7482ffbd7b9f99c9e8b5dccd3d7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{langid}{english}
+      \field{languageid}{english}
+      \field{lansortorder}{4}
+      \field{title}{Global Sensitivity Analysis: The Primer}
+      \field{usera}{M}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{year}{2008}
+      \field{dateera}{ce}
+      \keyw{saltelli2008sensitivity}
+    \endentry
+    \entry{openfootball2022}{misc}{}{}
+      \name{author}{1}{}{%
+        {{hash=92b75e6f8665f23f96239c56dd74382a}{%
+           family={{OpenFootball}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \name{namea}{1}{}{%
+        {{hash=92b75e6f8665f23f96239c56dd74382a}{%
+           family={{OpenFootball}},
+           familyi={O\bibinitperiod}}}%
+      }
+      \list{language}{1}{%
+        {english}%
+      }
+      \strng{namehash}{92b75e6f8665f23f96239c56dd74382a}
+      \strng{fullhash}{92b75e6f8665f23f96239c56dd74382a}
+      \strng{fullhashraw}{92b75e6f8665f23f96239c56dd74382a}
+      \strng{bibnamehash}{92b75e6f8665f23f96239c56dd74382a}
+      \strng{authorbibnamehash}{92b75e6f8665f23f96239c56dd74382a}
+      \strng{authornamehash}{92b75e6f8665f23f96239c56dd74382a}
+      \strng{authorfullhash}{92b75e6f8665f23f96239c56dd74382a}
+      \strng{authorfullhashraw}{92b75e6f8665f23f96239c56dd74382a}
+      \strng{nameabibnamehash}{92b75e6f8665f23f96239c56dd74382a}
+      \strng{nameanamehash}{92b75e6f8665f23f96239c56dd74382a}
+      \strng{nameafullhash}{92b75e6f8665f23f96239c56dd74382a}
+      \strng{nameafullhashraw}{92b75e6f8665f23f96239c56dd74382a}
+      \field{sortinit}{4}
+      \field{sortinithash}{9381316451d1b9788675a07e972a12a7}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{howpublished}{\url{https://github.com/openfootball/worldcup/tree/master/2022--qatar}}
+      \field{langid}{english}
+      \field{languageid}{english}
+      \field{lansortorder}{4}
+      \field{note}{访问日期：2026-08-14}
+      \field{title}{2022 FIFA World Cup Qatar schedule and stadium data}
+      \field{usera}{Z}
+      \field{userd}{english}
+      \field{userf}{english}
+      \field{year}{2022}
+      \field{dateera}{ce}
+      \keyw{openfootball2022}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

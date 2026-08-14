@@ -1,0 +1,40 @@
+{
+  "candidate_count": 1623,
+  "static_status": 1,
+  "dynamic_status": 1,
+  "lower_bound_status": 1,
+  "static_optimization_objective": 6.679789185102986,
+  "static_updated_evaluation": 6.6327957655273675,
+  "dynamic_optimization_objective": 6.652194498235981,
+  "feasible_objective_lower_bound": 4.79629815250905,
+  "feasible_objective_upper_bound": 6.652194498235981,
+  "solver": "COPT 8.0.6",
+  "license_mode": "non-commercial evaluation, 2000-variable/constraint limit",
+  "solve_evidence": {
+    "static": {
+      "rows": 48,
+      "columns": 1623,
+      "binary_variables": 1623,
+      "best_bound": 6.679789185102986,
+      "relative_gap": 0.0,
+      "solve_time_seconds": 0.06999969482421875
+    },
+    "dynamic": {
+      "rows": 48,
+      "columns": 1623,
+      "binary_variables": 1623,
+      "best_bound": 6.652194498235981,
+      "relative_gap": 0.0,
+      "solve_time_seconds": 0.046001434326171875
+    },
+    "feasible_lower_bound": {
+      "rows": 48,
+      "columns": 1623,
+      "binary_variables": 1623,
+      "best_bound": 4.79629815250905,
+      "relative_gap": 0.0,
+      "solve_time_seconds": 0.007999420166015625
+    }
+  },
+  "total_improvement_rate": 0.0029246690828978374
+}

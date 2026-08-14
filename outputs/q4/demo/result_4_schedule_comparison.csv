@@ -1,0 +1,14 @@
+indicator_name,indicator_category,actual_schedule_value,optimized_schedule_value,absolute_difference,relative_improvement,preferred_direction,evaluation_result
+matches,scale,72.0,72.0,0.0,,target,context_only
+teams,scale,48.0,48.0,0.0,,target,context_only
+travel_km_per_team,travel,2058.6302654518126,4257.173137475781,2198.5428720239684,-1.0679639316103462,lower,not_improved
+mean_transition_km,travel,1029.3151327259063,2128.5865687378905,1099.2714360119842,-1.0679639316103462,lower,not_improved
+mean_rest_hours,rest,133.41666666666666,167.8125,34.39583333333334,0.25780762023735176,higher,improved
+minimum_rest_hours,rest,91.0,159.0,68.0,0.7472527472527473,higher,improved
+rest_under_60h_rate,rest,0.0,0.0,0.0,,lower,not_improved
+timezone_crossings_per_team,travel,0.625,1.4583333333333333,0.8333333333333333,-1.3333333333333333,lower,not_improved
+unique_venues,venue_utilization,16.0,16.0,0.0,,target,context_only
+matches_per_venue_mean,venue_utilization,4.5,4.5,0.0,,target,context_only
+matches_per_venue_cv,venue_utilization,0.15713484026367724,0.35136418446315326,0.19422934419947602,-1.2360679774997896,lower,not_improved
+venue_match_hhi,venue_utilization,0.06404320987654322,0.07021604938271606,0.006172839506172839,-0.09638554216867469,lower,not_improved
+mean_stadium_capacity,capacity,68291.66666666667,71353.47222222222,3061.8055555555475,0.04483424852552357,higher,improved

@@ -1,0 +1,83 @@
+{
+  "ok": true,
+  "checks": [
+    {
+      "name": "q1_test_schema",
+      "ok": true,
+      "detail": "columns=2, exact_order=True"
+    },
+    {
+      "name": "q1_match_schema",
+      "ok": true,
+      "detail": "columns=4, exact_order=True"
+    },
+    {
+      "name": "q2_schema",
+      "ok": true,
+      "detail": "columns=22, exact_order=True"
+    },
+    {
+      "name": "q3_schema",
+      "ok": true,
+      "detail": "columns=22, exact_order=True"
+    },
+    {
+      "name": "actual_schema",
+      "ok": true,
+      "detail": "columns=17, exact_order=True"
+    },
+    {
+      "name": "q4_schema",
+      "ok": true,
+      "detail": "columns=8, exact_order=True"
+    },
+    {
+      "name": "q1_content_and_units",
+      "ok": true,
+      "detail": "140 test rows and 72 match rows validated"
+    },
+    {
+      "name": "q2_six_hard_constraint_groups",
+      "ok": true,
+      "detail": "all independent assertions passed"
+    },
+    {
+      "name": "q2_objective_first_row_only",
+      "ok": true,
+      "detail": "nonempty_rows=[0]"
+    },
+    {
+      "name": "q2_copt_objective_reconciliation",
+      "ok": true,
+      "detail": "copt=0.458163650373, evaluator=0.458163650373, rows/cols/bins=865/844/840, gap=0.0"
+    },
+    {
+      "name": "q3_schedule_and_resource_constraints",
+      "ok": true,
+      "detail": "24 matches, probability total 32, all capacity checks passed; three 48x1623 COPT models at zero gap, including the feasible Z3 lower bound"
+    },
+    {
+      "name": "q4_actual_source_contract",
+      "ok": true,
+      "detail": "row-level URL and retrieval date present"
+    },
+    {
+      "name": "q4_actual_tournament_structure",
+      "ok": true,
+      "detail": "matches=72, groups=12, teams=48"
+    },
+    {
+      "name": "q4_comparison_content",
+      "ok": true,
+      "detail": "indicators=13, finite_core_values=True"
+    }
+  ],
+  "sha256": {
+    "q1_test": "042ce6b39e06228a93e7269efe44650b22f95d113f49d35903dd18e0dc6a8da5",
+    "q1_match": "2704f8c25aef22e2c16911c44f48c800d34fbfd5bf72ab45a452899b5c1982ff",
+    "q2": "d650470164fb5702a77ad087a948ba809a9b964b4ad2cdfeb943df2d3045246b",
+    "q3": "9efefa3638be1f5785b4ffdafcfddef97ad2c0b5c785d8a32d7dba04aff6bbb9",
+    "actual": "7590740010c47eb69aabdbfd54da5d48f73509491799726da8c8ec544b16c538",
+    "q4": "e5ecb3568abacc339070afe547a8ec2e1f86dde24729626442817bcf6c7a8eb4"
+  }
+}

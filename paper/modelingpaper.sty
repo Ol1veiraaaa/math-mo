@@ -1,0 +1,342 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{modelingpaper}[2026/08/13 Mathematical modeling contest paper style]
+
+% ---------- Page and typography ----------
+\RequirePackage{geometry}
+\geometry{
+  a4paper,
+  left=2.55cm,
+  right=2.55cm,
+  top=2.25cm,
+  bottom=2.25cm,
+  headheight=15pt,
+  headsep=0.45cm,
+  footskip=0.95cm
+}
+\RequirePackage{setspace}
+\setstretch{1.25}
+\setlength{\parindent}{2em}
+\setlength{\parskip}{0pt}
+\setlength{\emergencystretch}{2em}
+\raggedbottom
+
+% ---------- Mathematics ----------
+\RequirePackage{amsmath,amssymb,mathtools,bm}
+\RequirePackage{amsthm}
+\RequirePackage{chngcntr}
+\allowdisplaybreaks[3]
+\setlength{\jot}{5pt}
+\newcommand{\UseSectionEquationNumbering}{\counterwithin{equation}{section}}
+\newcommand{\UseContinuousEquationNumbering}{\counterwithout{equation}{section}}
+\UseSectionEquationNumbering
+
+% ---------- Figures, tables and units ----------
+\RequirePackage{graphicx}
+\graphicspath{{figures/}}
+\RequirePackage{float}
+\RequirePackage{booktabs,longtable,tabularx,array,multirow,threeparttable}
+\RequirePackage[table]{xcolor}
+\RequirePackage{caption,subcaption}
+\RequirePackage{siunitx}
+\sisetup{
+  detect-all=true,
+  per-mode=symbol,
+  range-phrase=--,
+  range-units=single,
+  table-number-alignment=center
+}
+\renewcommand{\arraystretch}{1.22}
+\captionsetup{
+  font=small,
+  labelfont=bf,
+  labelsep=quad,
+  justification=centering,
+  singlelinecheck=true
+}
+\captionsetup[table]{position=top,skip=5pt}
+\captionsetup[figure]{position=bottom,skip=5pt}
+
+% Muted, print-safe accent colors.
+\definecolor{ModelBlue}{HTML}{4D6A86}
+\definecolor{ModelLavender}{HTML}{ECEAF8}
+\definecolor{ModelGray}{HTML}{F4F4F4}
+\definecolor{ModelOrange}{HTML}{C97A40}
+
+% ---------- Section hierarchy ----------
+\newcommand{\UseChineseSectioning}{%
+  \ctexset{
+    section={
+      name={,、},
+      number=\chinese{section},
+      format=\centering\heiti\zihao{3},
+      aftername=\quad,
+      beforeskip=1.25em,
+      afterskip=0.8em
+    },
+    subsection={
+      number=\arabic{section}.\arabic{subsection},
+      format=\heiti\zihao{4},
+      aftername=\quad,
+      beforeskip=1.05em,
+      afterskip=0.45em
+    },
+    subsubsection={
+      number=\arabic{section}.\arabic{subsection}.\arabic{subsubsection},
+      format=\heiti\zihao{-4},
+      aftername=\quad,
+      beforeskip=0.85em,
+      afterskip=0.35em
+    }
+  }
+}
+\newcommand{\UseArabicSectioning}{%
+  \ctexset{
+    section={
+      name={,},
+      number=\arabic{section},
+      format=\centering\heiti\zihao{3},
+      aftername=\quad,
+      beforeskip=1.25em,
+      afterskip=0.8em
+    },
+    subsection={
+      number=\arabic{section}.\arabic{subsection},
+      format=\heiti\zihao{4},
+      aftername=\quad,
+      beforeskip=1.05em,
+      afterskip=0.45em
+    },
+    subsubsection={
+      number=\arabic{section}.\arabic{subsection}.\arabic{subsubsection},
+      format=\heiti\zihao{-4},
+      aftername=\quad,
+      beforeskip=0.85em,
+      afterskip=0.35em
+    }
+  }
+}
+\UseChineseSectioning
+
+% ---------- Header and footer ----------
+\RequirePackage{fancyhdr}
+\newif\ifmodelrunninghead
+\modelrunningheadfalse
+\newcommand{\EnableRunningHead}{\modelrunningheadtrue}
+\newcommand{\DisableRunningHead}{\modelrunningheadfalse}
+\fancypagestyle{modelplain}{%
+  \fancyhf{}
+  \fancyfoot[C]{\small\thepage}
+  \renewcommand{\headrulewidth}{0pt}
+  \renewcommand{\footrulewidth}{0pt}
+}
+\AtBeginDocument{%
+  \renewcommand{\sectionmark}[1]{\markboth{\thesection\quad #1}{}}
+  \ifmodelrunninghead
+    \pagestyle{fancy}
+    \fancyhf{}
+    \fancyhead[L]{\small\nouppercase{\leftmark}}
+    \fancyhead[R]{\small\thepage}
+    \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\footrulewidth}{0pt}
+  \else
+    \pagestyle{modelplain}
+  \fi
+}
+
+% ---------- Anonymous title and abstract ----------
+\makeatletter
+\renewcommand{\maketitle}{%
+  \thispagestyle{modelplain}
+  \begin{center}
+    \vspace*{-0.8em}
+    {\heiti\bfseries\zihao{-2}\@title\par}
+  \end{center}
+  \vspace{1.1em}
+}
+\makeatother
+
+\newenvironment{modelabstract}{%
+  \begin{center}
+    {\heiti\bfseries\zihao{3} 摘要}
+  \end{center}
+  \vspace{0.25em}
+  \begingroup
+  \setlength{\parindent}{2em}
+  \zihao{-4}
+}{%
+  \par
+  \endgroup
+  \vspace{0.8em}
+}
+\newcommand{\keywords}[1]{%
+  \par\vspace{0.4em}
+  \noindent{\heiti 关键词：}\, #1
+}
+
+% ---------- Lists ----------
+\RequirePackage{enumitem}
+\setlist{topsep=0.25em,itemsep=0.15em,parsep=0pt,partopsep=0pt}
+\setlist[enumerate,1]{leftmargin=2.4em,label=\arabic*.,ref=\arabic*}
+\setlist[itemize,1]{leftmargin=2.2em,label=\textbullet}
+
+% ---------- Notation table ----------
+\newcolumntype{Y}{>{\centering\arraybackslash}X}
+\newenvironment{modelnotation}{%
+  \begin{longtable}{>{\centering\arraybackslash}p{0.19\textwidth}p{0.56\textwidth}>{\centering\arraybackslash}p{0.14\textwidth}}
+  \caption{符号说明}\label{tab:notation}\\
+  \toprule
+  \textbf{符号} & \centering\textbf{含义}\arraybackslash & \textbf{单位}\\
+  \midrule
+  \endfirsthead
+  \multicolumn{3}{c}{\small 表~\thetable\quad 符号说明（续）}\\
+  \toprule
+  \textbf{符号} & \centering\textbf{含义}\arraybackslash & \textbf{单位}\\
+  \midrule
+  \endhead
+  \midrule
+  \multicolumn{3}{r}{\small 续下页}\\
+  \endfoot
+  \bottomrule
+  \endlastfoot
+}{%
+  \end{longtable}
+}
+\newcommand{\sym}[3]{#1 & #2 & #3\\}
+
+% ---------- Theorems and proof ----------
+\theoremstyle{definition}
+\newtheorem{definition}{定义}[section]
+\newtheorem{assumption}{假设}[section]
+\theoremstyle{plain}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}{引理}[section]
+\renewcommand{\proofname}{证明}
+
+% ---------- Callout boxes ----------
+\RequirePackage[most]{tcolorbox}
+\newtcolorbox{modelbox}[1][模型说明]{
+  enhanced,
+  breakable,
+  colback=ModelGray,
+  colframe=black!55,
+  boxrule=0.6pt,
+  arc=1mm,
+  left=1.0em,right=1.0em,top=0.7em,bottom=0.7em,
+  title=#1,
+  fonttitle=\heiti\bfseries,
+  coltitle=black
+}
+\newtcolorbox{resultbox}[1][核心结论]{
+  enhanced,
+  breakable,
+  colback=ModelLavender!55,
+  colframe=ModelBlue,
+  boxrule=0.7pt,
+  arc=1mm,
+  left=1.0em,right=1.0em,top=0.7em,bottom=0.7em,
+  title=#1,
+  fonttitle=\heiti\bfseries,
+  coltitle=black
+}
+
+% ---------- Algorithms ----------
+\RequirePackage[ruled,vlined,linesnumbered]{algorithm2e}
+\SetAlgorithmName{算法}{算法}{算法目录}
+\SetKwInput{KwIn}{输入}
+\SetKwInput{KwOut}{输出}
+\SetKw{KwRet}{返回}
+\SetAlgoCaptionSeparator{\quad}
+\DontPrintSemicolon
+\SetAlFnt{\small}
+\SetAlCapFnt{\small\heiti}
+\SetAlCapNameFnt{\small\heiti}
+
+% ---------- Code appendix ----------
+\RequirePackage{listings}
+\lstdefinestyle{modelcode}{
+  basicstyle=\ttfamily\small,
+  keywordstyle=\bfseries,
+  commentstyle=\itshape,
+  stringstyle=\ttfamily,
+  numbers=left,
+  numberstyle=\scriptsize,
+  stepnumber=1,
+  numbersep=8pt,
+  frame=single,
+  rulecolor=\color{black!50},
+  backgroundcolor=\color{black!1},
+  breaklines=true,
+  breakatwhitespace=false,
+  showstringspaces=false,
+  tabsize=4,
+  columns=fullflexible,
+  keepspaces=true,
+  xleftmargin=1.6em,
+  framexleftmargin=1.2em
+}
+\lstset{style=modelcode}
+
+% ---------- Flowcharts and plots ----------
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,shapes.geometric,fit,calc}
+\tikzset{
+  modelstep/.style={
+    rounded corners,
+    draw=ModelBlue,
+    fill=ModelLavender!60,
+    minimum width=3.0cm,
+    minimum height=0.9cm,
+    align=center,
+    font=\small
+  },
+  modelarrow/.style={-{Stealth[length=2.2mm]},thick,draw=black!65}
+}
+\RequirePackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% ---------- Bibliography ----------
+\RequirePackage[backend=biber,style=gb7714-2015,sorting=none,maxbibnames=99]{biblatex}
+\defbibheading{bibliography}[参考文献]{\section*{#1}}
+
+% ---------- Cross-references ----------
+\RequirePackage{url}
+\RequirePackage[hidelinks,unicode]{hyperref}
+\RequirePackage{bookmark}
+\RequirePackage[nameinlink,noabbrev]{cleveref}
+\crefname{figure}{图}{图}
+\crefname{table}{表}{表}
+\crefname{equation}{式}{式}
+\crefname{algorithm}{算法}{算法}
+\crefname{section}{节}{节}
+\crefname{subsection}{小节}{小节}
+\crefname{theorem}{定理}{定理}
+\crefname{lemma}{引理}{引理}
+
+% ---------- Appendix style ----------
+\newcommand{\ModelAppendix}{%
+  \clearpage
+  \appendix
+  \ctexset{
+    section={
+      name={附录~,},
+      number=\Alph{section},
+      format=\centering\heiti\zihao{3},
+      aftername=\quad,
+      beforeskip=1.2em,
+      afterskip=0.8em
+    },
+    subsection={
+      number=\Alph{section}.\arabic{subsection},
+      format=\heiti\zihao{4},
+      aftername=\quad
+    }
+  }
+}
+
+% ---------- Convenience ----------
+\newcommand{\dif}{\mathop{}\!\mathrm{d}}
+\newcommand{\e}{\mathrm{e}}
+\newcommand{\ii}{\mathrm{i}}
+\newcommand{\trans}{\mathsf{T}}
+\newcommand{\vect}[1]{\bm{#1}}
+\newcommand{\mat}[1]{\bm{#1}}

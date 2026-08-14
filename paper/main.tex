@@ -1,0 +1,362 @@
+% !TEX program = xelatex
+\documentclass[UTF8,a4paper,zihao=-4,fontset=fandol]{ctexart}
+\usepackage{modelingpaper}
+\addbibresource{references.bib}
+
+\title{数据驱动的世界杯观看预测、赛程与动态资源协同优化}
+
+\begin{document}
+\maketitle
+
+\begin{modelabstract}
+本文研究48支球队、12个小组、72场比赛条件下的世界杯观看人数预测、场馆与时段协同排程、前两轮反馈下的第三轮资源重配及真实赛事对照。四问不是独立任务，而是“预测需求---固定赛程---动态更新---外部检验”的数据链。针对问题一，构造仅含赛前信息且交换球队次序不变的概率、实力、球迷、球星、市场和区域特征，以按日期扩展窗口验证7类模型；岭回归的平均MSE为225.0601（单位为百万人平方），较均值基线降低61.32\%，故用于生成140条测试集预测和72场待排比赛预测。针对问题二，将六类赛事规则写成0--1混合整数模型；受本地COPT评估版2000变量限制，采用“可行基准场馆+两个安保合格的大容量场馆+同参考日全部时段”的可审计候选分解，并在该集合内精确线性化完整$Z_2$。COPT以0间隙得到$Z_2=0.4581636504$，较固定可行基线0.3187898738提高43.72\%，求解目标与独立评估器误差小于$4\times10^{-15}$；在10000组权重扰动下改进率为100\%。针对问题三，按统一信息截面同时进行20000次泊松模拟，严格执行“各组前二+成绩最好的8个第三名”晋级规则，再以共同候选集分别求解静态和动态COPT模型。动态方案改变10场资源或票价决策，更新环境总目标由6.6327957655升至6.6521944982，提高0.29247\%；相对50000次模拟的晋级概率MAE为0.001416。针对问题四，从OpenFootball采集并解析已结束的2026年美加墨世界杯72场小组赛，与优化赛程同规模，按每队、每次转场和场馆份额构造同口径指标。实际赛程每队旅行2058.63 km、每队跨时区0.625次，低于优化赛程的4257.17 km和1.458次；优化赛程平均休息167.81 h、最小休息159.00 h、平均容量71353人，分别优于实际赛程的133.42 h、91.00 h和68292人，说明区域化分组是控制跨国旅行成本的关键，而优化方案以旅行和时区负担换取更长休息与更大容量。全部输出均经模板列序、单位、约束、来源和哈希验收。
+
+\keywords{足球世界杯；岭回归；混合整数规划；COPT；蒙特卡洛模拟；动态资源配置}
+\end{modelabstract}
+
+\clearpage
+\section{问题重述}
+\subsection{问题背景}
+大型足球赛事同时受竞技不确定性、商业需求、场馆能力、跨时区旅行和有限公共资源影响。题目给出历史比赛、球队、72场未来对阵、16个场馆、80个时段及赛后反馈，要求建立一条前后口径一致的模型链：先预测观看需求，再确定赛程，继而在赛程固定时依据前两轮信息动态重配资源，最后与一届真实世界杯比较。
+
+\subsection{四项任务及其耦合}
+问题一输出是问题二的转播需求输入；问题二确定的第三轮场馆和时段在问题三中不可改变；问题三只允许在统一的信息截面下更新资源；问题四必须沿用问题二的指标方向和标准化思想。图\ref{fig:flow}给出整体流程。
+
+\begin{figure}[H]
+  \centering
+  \begin{tikzpicture}[node distance=1.3cm and 0.75cm]
+    \node[modelstep] (q1) {Q1 赛前特征\\观看人数预测};
+    \node[modelstep,right=of q1] (q2) {Q2 场馆--时段\\COPT优化};
+    \node[modelstep,right=of q2] (q3) {Q3 反馈更新\\动态资源COPT};
+    \node[modelstep,below=of q2] (q4) {Q4 真实赛程\\同口径结构评价};
+    \draw[modelarrow] (q1) -- node[above,font=\scriptsize]{72场需求} (q2);
+    \draw[modelarrow] (q2) -- node[above,font=\scriptsize]{固定第三轮} (q3);
+    \draw[modelarrow] (q2) -- (q4);
+  \end{tikzpicture}
+  \caption{四问的数据与决策传递关系}
+  \label{fig:flow}
+\end{figure}
+
+\section{问题分析}
+问题一的核心风险是赛后信息泄漏和随机划分导致的过乐观验证；因此只保留赛前可得、对调主客顺序不变的特征，并按时间扩展验证。问题二是大规模组合优化，必须先建立独立评估器和硬约束检查器，再在COPT评估版容量内做候选分解。问题三的关键是模拟24场第三轮比赛时不得逐场更新，以及静态/动态方案必须用同一更新环境和归一化边界比较。问题四存在赛事规模、地理形态与公开字段不可比问题，因此仅对能从两套赛程同口径识别的结构量做规模标准化，不虚构历史商业变量。
+
+\section{模型假设}
+\begin{enumerate}
+  \item 附件中的赛前赔率、Elo、球队属性与基础预测在决策时可获得；测试集真实观看人数不可见。
+  \item 给定题设泊松均值后，第三轮各场进球在一次模拟内条件独立；24场均由第三轮开始前同一信息截面生成。
+  \item Q2受限候选集中未保留的场馆--时段组合不参与COPT证明，故整数最优性仅限该集合；最终赛程仍必须通过全部原始硬约束。
+  \item Q4的旅行仅计相邻比赛场馆间位移，不计球队驻地至首场馆；两届赛事的商业与风险字段无法从公开赛程同口径恢复，故不参与数值比较。
+\end{enumerate}
+
+\section{符号说明}
+\begin{modelnotation}
+  \sym{$i,v,s,t$}{比赛、场馆、时段与球队索引}{--}
+  \sym{$x_{ivs}$}{比赛$i$选择场馆$v$与时段$s$的0--1变量}{--}
+  \sym{$T,B,U,H$}{票务、转播、悬念与吸引力指标}{--}
+  \sym{$C,D,F,R$}{运营成本、旅行、公平惩罚与执行风险}{--}
+  \sym{$s_t,h_t$}{球队状态与伤病影响}{--}
+  \sym{$\lambda_{i,a},\lambda_{i,b}$}{第三轮比赛双方泊松进球均值}{球}
+  \sym{$p_t,Q_i,A_i$}{晋级概率、晋级重要性与更新吸引力}{--}
+  \sym{$\delta_i$}{票价相对调整比例}{--}
+  \sym{$Z_2,Z_3$}{赛程与动态资源综合目标}{--}
+\end{modelnotation}
+
+\section{数据审计与预处理}
+附件含15个工作表。历史比赛共700行，题设固定560行为训练集、140行为隐藏测试集；未来赛程为48队、12组、72场。我们完成字段类型、唯一键、球队映射、概率正值、时间时区和模板列序检查。训练目标除以$10^6$转为“百万人”，而未来比赛提交值再乘$10^6$恢复“人”。所有输出均从官方模板字段生成，避免手工表头。
+
+对赔率使用归一化隐含概率
+\begin{equation}
+ p_k=\frac{1/o_k}{\sum_{j\in\{a,d,b\}}1/o_j},\qquad
+ E_p=-\frac{\sum_k p_k\ln p_k}{\ln 3}.
+\end{equation}
+其中$E_p$越大表示三种赛果越接近。球队两侧变量采用均值、绝对差、和、最大值或排序后的类别对，保证交换$a,b$不改变预测。完整18个特征均有题面依据：比赛阶段；概率及熵；Elo均值与差、排名均值；球迷、球星、市场总量；足联与时区区域组合。进球、xG、射门、控球、现场观众、当场观看人数和比赛编号均被禁止进入特征矩阵。
+
+\section{问题一：转播观看人数预测}
+\subsection{验证设计与候选模型}
+训练数据按日期构造3个扩展窗口，每折训练结束日严格早于验证开始日。比较均值基线、岭回归、弹性网络、RBF--SVR、随机森林、极端随机树和直方图梯度提升。数值特征在每一折内标准化，类别特征在每一折内独热编码，从而不使用验证期分布信息。主指标为
+\begin{equation}
+ \mathrm{MSE}=\frac{1}{n}\sum_{j=1}^{n}(y_j-\hat y_j)^2.
+\end{equation}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.98\textwidth]{q1_model_comparison.pdf}
+  \caption{七类模型的时间验证结果；隐藏测试标签不参与选择}
+  \label{fig:q1models}
+\end{figure}
+
+岭回归\cite{hoerl1970ridge}平均MSE为225.0601，标准差48.8524，平均RMSE为14.9446，平均MAE为11.8346；极端随机树MSE为238.4691，均值基线为581.8325。岭回归相对均值基线降低$61.32\%$，且三折MSE依次为278.9919、212.4149、183.7736，故作为最终模型。该结论只说明其在当前时间验证协议和候选集中领先，不等同于隐藏测试最优。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.98\textwidth]{q1_ridge_diagnostics.png}
+  \caption{岭回归的验证期预测与时间残差}
+  \label{fig:q1diag}
+\end{figure}
+
+\subsection{最终拟合与输出}
+在全部560条训练记录上重拟合岭回归，生成140条测试预测（百万人）与72场未来预测（人）。两文件重载后检查ID集合、行数、非负有限值和单位数量级；未使用隐藏测试真实值计算任何性能指标。
+
+\section{问题二：场馆与开球时段协同优化}
+\subsection{综合评价函数}
+按题面定义，所有量纲指标先做Min--Max归一化；极差为0时记为0。目标为
+\begin{equation}
+ \max Z_2=0.25T'+0.25B'+0.15U'+0.10H'
+ -0.08C'-0.07D'-0.06F'-0.04R'.
+ \label{eq:z2}
+\end{equation}
+其中旅行负担以距离、旅行时间、时区差的标准化值按$0.5,0.3,0.2$加权；公平惩罚为黄金时段次数极差和大容量场馆次数极差各占一半；风险为气候、上座率、安保需求/能力按$0.5,0.3,0.2$加权。
+
+\subsection{0--1模型与候选分解}
+完整组合为$72\times16\times80$。本机COPT 8.0.6无商业许可证，单个MIP限2000变量，因此每场保留确定性可行基准的场馆、两个安保合格且容量最大的备选场馆，并保留基准参考日的全部候选时段，得到824个赋值候选。该选择只使用容量和安保等题设事实，不新增经验评分。
+
+对每场恰选一次：
+\begin{equation}
+ \sum_{(v,s)\in\Omega_i}x_{ivs}=1,\quad\forall i.
+\end{equation}
+其余约束依次为：同场馆同UTC时刻至多一场；同队轮次顺序与相邻比赛至少60 h；场馆当地日和总场次上下界；任意两队黄金时段次数差不超过2；安保能力不低于需求且第三轮每日高安保数量受限；同一时段比赛数不超过转播容量。引入场馆启用变量$y_v$计一次性成本，并用$g^{\max},g^{\min},l^{\max},l^{\min}$精确线性化两类资源次数极差。由此式\eqref{eq:z2}在受限候选集上成为线性目标。
+
+\subsection{求解与可执行性}
+COPT模型\cite{copt2026}含840个二元变量、865个约束，约0.46 s在20个分支结点达到0.0000\%间隙。目标$0.45816365037316586$与完全独立的赛程评估器$0.458163650373169$相差小于$4\times10^{-15}$。固定可行基线为0.3187898738，因此提高43.72\%。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.96\textwidth]{q2_indicator_decomposition.pdf}
+  \caption{Q2基线与受限候选COPT方案的八指标分解；成本型指标柱高不代表更优}
+  \label{fig:q2decomp}
+\end{figure}
+
+最终赛程由独立函数重新验证六类硬约束，72场均恰好一次，字段\path{total_objective_value}仅首行非空。必须强调：0间隙证明受限候选集内整数最优，不证明未保留的全部$16\times80$组合上的全局最优。
+
+\subsection{权重稳健性}
+将八个基准权重分别乘以$U(0.8,1.2)$后归一化，共抽样10000次\cite{saltelli2008sensitivity}。COPT方案胜率为100\%，最小、5\%分位和中位优势分别为0.105729、0.117677和0.139626。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.72\textwidth]{q2_weight_robustness.pdf}
+  \caption{Q2权重扰动下的目标优势分布}
+\end{figure}
+
+\section{问题三：第三轮动态资源优化}
+\subsection{状态、泊松模拟与晋级概率}
+对球队$t$，由前两轮积分、xG和红牌构造
+\begin{equation}
+ s_t=0.45\frac{pt_t}{3G_t}+0.35\left[0.5+0.5\tanh\left(\frac{(xGF_t-xGA_t)/G_t}{1.25}\right)\right]
+ +0.20\exp\left(-0.55\frac{RC_t}{G_t}\right).
+\end{equation}
+伤病$h_t$取两场平均并截断至$[0,3]$。令
+\begin{equation}
+ \Delta_i=0.32(s_a-s_b)-0.055(h_a-h_b),
+\end{equation}
+\begin{equation}
+ \lambda_{i,a}=\operatorname{clip}[\lambda^0_{i,a}e^{\Delta_i-0.04h_a},0.15,4.50],\quad
+ \lambda_{i,b}=\operatorname{clip}[\lambda^0_{i,b}e^{-\Delta_i-0.04h_b},0.15,4.50].
+\end{equation}
+固定种子20260814同时模拟24场比赛20000次。每次先按积分、净胜球、总进球排每组名次，再从12个第三名中取8队；完全相同指标用独立连续随机键等比例打破。每次恰有32队晋级，故所有球队晋级概率之和也严格为32。
+
+晋级重要性、无激励风险和默契风险按题面计算：
+\begin{equation}
+ Q_i=\frac{4p_a(1-p_a)+4p_b(1-p_b)}{2},\qquad
+ R_i^{stake}=\tfrac12(2p_a-1)^2+\tfrac12(2p_b-1)^2.
+\end{equation}
+由同组模拟统计双方在平局和各自取胜条件下的晋级概率，进而得到共同平局收益、胜负激励增量和$R_i^{col}$。图\ref{fig:q3prob}显示大量球队已接近必然晋级或淘汰，也有一批球队处在$0.25$--$0.75$的高敏感区。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.92\textwidth]{q3_advancement_probabilities.pdf}
+  \caption{前两轮信息更新后的48队晋级概率}
+  \label{fig:q3prob}
+\end{figure}
+
+进一步把24场的晋级重要性与更新吸引力联合展示于图\ref{fig:q3importance}。$Q_i$中位数为0.2416，
+有4场不低于0.75；更新吸引力范围为$[0.3669,0.6887]$，二者相关系数为0.8285。
+这说明晋级悬念是吸引力更新的重要来源，但反馈、球队状态与伤病项仍保留独立影响。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.86\textwidth]{q3_importance_attractiveness.pdf}
+  \caption{第三轮晋级重要性分布及其与更新吸引力的关系；散点颜色表示无激励风险}
+  \label{fig:q3importance}
+\end{figure}
+
+\subsection{需求更新与资源候选}
+将前两轮实际/预测现场比和转播比按球队平均并截断到$[0.75,1.25]$，比赛反馈取双方几何均值。更新吸引力为
+\begin{equation}
+ A_i=\operatorname{clip}[0.50A_i^0+0.25Q_i+0.12F_i+0.08s_i+0.05(1-H_i),0,1].
+\end{equation}
+现场和转播需求严格采用题设乘法式。每场候选由3级转播、允许的安保等级、3级交通和当日票价上下界间5点网格组成；若同一交通等级下涨价后的现场需求低于零调整需求的88\%，则删除该候选。五点离散化覆盖上下界、零附近和中间水平，避免引入题外变量。
+
+\subsection{静态与动态双COPT模型}
+对票务价值、转播价值、吸引力、资源成本和风险使用候选集Min--Max边界，目标为
+\begin{equation}
+ \max Z_3=\sum_{i\in I_3}\left(0.35TV_i'+0.35BV_i'+0.10A_i'-0.10C_i'-0.10R_i'\right).
+\end{equation}
+静态模型在赛前环境求解；随后固定其四项决策，在更新环境下重评。动态模型在相同候选、每日容量、预算和更新边界下重求解。为检验极端情形，再在完全相同的更新候选与每日约束下最小化同一$Z_3$。三个模型各含1623个二元变量和48个约束，均达到0间隙且无约束违反。最小化模型给出可行下端4.7962981525，正式动态最大化模型给出上端6.6521944982，故同口径可行目标区间为$[4.7963,6.6522]$。静态赛前目标为6.6797891851，固定决策的更新值为6.6327957655；动态值为6.6521944982，改善0.29247\%。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.82\textwidth]{q3_static_dynamic_contributions.pdf}
+  \caption{动态方案相对固定静态决策的逐场贡献变化}
+  \label{fig:q3change}
+\end{figure}
+
+10场至少改变一项资源或票价。7场贡献增加、3场减少并不矛盾：每日容量和预算使比赛相互耦合，动态模型会从边际收益较低的场次回收资源，因此应以全局和而非逐场全正作为判据。
+
+表\ref{tab:q3totals}在同一更新环境下比较题目要求的总量。动态方案将资源成本指数降低4.43\%，同时令转播观看和转播价值提高0.11\%；现场和票务价值分别下降0.78\%，风险总量不变，最终净效益提高0.29247\%。这说明模型不是同步放大全部投入，而是在每日耦合约束下将资源转向边际回报更高的比赛。
+
+\begin{table}[H]
+\centering
+\caption{Q3静态固定决策与动态决策的更新环境总量比较}
+\label{tab:q3totals}
+\begin{tabular}{lrrr}
+\toprule
+指标 & 静态方案 & 动态方案 & 相对变化\\
+\midrule
+预计现场观众/人 & 911765 & 904631 & $-0.78\%$\\
+预计转播观众/十亿人次 & 3.2599 & 3.2636 & $+0.11\%$\\
+票务价值/百万美元 & 111.9965 & 111.1235 & $-0.78\%$\\
+转播价值/百万美元 & 169.5157 & 169.7066 & $+0.11\%$\\
+资源成本指数 & 384 & 367 & $-4.43\%$\\
+风险暴露指数 & 11.2426 & 11.2426 & $0.00\%$\\
+净效益 & 6.6328 & 6.6522 & $+0.29247\%$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.86\textwidth]{q3_daily_resource_utilization.pdf}
+  \caption{Q3六个比赛日的静态/动态资源占用率；虚线为题面给定容量或预算上限}
+  \label{fig:q3resources}
+\end{figure}
+
+图\ref{fig:q3resources}显示两方案在各日均未越过题面上限。动态方案从6月26日起减少3级交通配置，并使总资源成本由384降至367。逐场改善率最大的是GL05（England--Panama），转播优先级由2升至3，更新转播观看由1.1856亿升至1.2646亿，净贡献由0.07304升至0.08845，改善21.09\%。最小的是GA05（Mexico--Czechia），转播优先级由3降至2，成本由13降至9，净贡献由0.01123降至0.00046；其$-95.90\%$主要源于静态分母很小，反映为其他场次释放稀缺高等级转播资源，而非全局退化。
+
+\subsection{蒙特卡洛收敛}
+在相同种子和算法下分别运行5000、10000、20000和50000次，以50000次为参考。20000次的晋级概率MAE为0.001416、最大绝对差0.008530，默契风险MAE为0.000358，且各规模晋级概率总和均为32。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.72\textwidth]{q3_simulation_convergence.pdf}
+  \caption{Q3模拟次数的收敛检验}
+\end{figure}
+
+\section{问题四：真实赛程综合评价}
+\subsection{公开数据与质量控制}
+选择已结束且与题设同规模的2026年美加墨世界杯（48队、12组、72场小组赛，2026年7月19日完赛）。程序解析OpenFootball赛程和场馆文件\cite{openfootball2026}，得到72场、12组、48队、16场馆；每组6场、每队3场，保留每行来源URL和采集日期；每场开球时间自带UTC偏移（如UTC-6），解析后统一换算为UTC，场馆名称、坐标、容量与国家按同源stadiums文件映射。原始文件哈希、解析程序和来源说明均列入支撑材料。
+
+\subsection{规模无关的可识别指标}
+实际与优化赛程同为48队、72场、16场馆，规模指标直接可比；结构上再比较每队旅行、每次转场距离、平均/最小休息、60 h以下比例、每队跨时区次数、场馆负载变异系数、场馆份额HHI和平均容量。图中每对指标先在两方案间Min--Max，再将成本型指标反向，因而柱越高表示结构上越优。该图是可识别结构指标的展示，不是对真实赛程完整$Z_2$的复算。
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.92\textwidth]{q4_structural_tradeoffs.pdf}
+  \caption{2026实际赛程与模拟优化赛程的方向化结构权衡}
+  \label{fig:q4trade}
+\end{figure}
+
+\begin{table}[H]
+\centering
+\caption{Q4主要同口径指标}
+\begin{tabular}{lrrl}
+\toprule
+指标 & 2026实际 & Q2优化 & 方向性结论\\
+\midrule
+每队转场旅行/km & 2058.63 & 4257.17 & 实际优\\
+平均休息/h & 133.42 & 167.81 & 优化优\\
+最小休息/h & 91.00 & 159.00 & 优化优\\
+每队跨时区次数 & 0.625 & 1.458 & 实际优\\
+场馆负载CV & 0.1571 & 0.3514 & 实际优\\
+场馆份额HHI & 0.0640 & 0.0702 & 实际优\\
+平均场馆容量/人 & 68292 & 71353 & 优化优\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+FIFA实际方案按西部、中部、东部三个地理区域组织小组，将每队旅行控制在2058.63 km、每队跨时区0.625次，显著低于模拟方案的4257.17 km和1.458次；模拟方案则以区域分散换取更长的平均/最小休息（167.81/159.00 h对133.42/91.00 h）和略高的平均容量（71353人对68292人）。场馆负载CV与HHI方向一致但数值不同：前者衡量场馆场次数离散，后者衡量份额集中度；实际方案的场馆分配更均衡（CV 0.1571、HHI 0.0640对0.3514、0.0702）。公开赛程不含题设定义所需的预测观众、单位转播价值、黄金时段得分、安保需求和气候风险，故不计算伪造的票务、转播、公平和风险指标。
+
+\section{模型评价与推广}
+\subsection{主要优点}
+\begin{enumerate}
+  \item 四问共享同一数据接口，Q1单位、Q2赛程和Q3信息截面均自动传递，减少人工口径漂移。
+  \item Q2在许可限制下仍精确线性化受限集的完整$Z_2$，COPT目标与独立评估器数值对账；Q3用共同候选和共同边界实现可识别的静态/动态比较。
+  \item 特征与变量均有题面或数据字段依据；对无法识别的Q4商业量选择缺失披露而非任意代理。
+  \item 采用时间验证、权重扰动、模拟收敛、独立约束检查和SHA-256形成多层证据链。
+\end{enumerate}
+
+\subsection{局限与改进}
+岭回归可能低估极端热门比赛，未来可在不泄漏条件下增加严格滞后的球队热度并比较CatBoost/LightGBM；但隐藏测试标签不可用时仍不能声称外部最优。Q2受评估许可证限制，未搜索全部92160个场馆--时段组合；商业许可下可用列生成或拉格朗日分解扩展候选。Q3票价连续变量被离散为5点，可进一步用分段线性近似提高精度。Q4未获得可同口径历史票务和转播数据，结论仅限结构层面；若获得官方运营数据，可复用Q2评估器完成更完整比较。
+
+\section{结论}
+本文给出一套从需求预测到赛程、再到赛中资源更新和外部对照的可运行方案。岭回归在时间验证中领先7类候选；受限候选COPT将$Z_2$由0.3188提高到0.4582并严格满足全部硬约束；统一信息截面的泊松模拟与双COPT模型使第三轮动态资源总效益提高0.29247\%；与已结束的2026年真实赛程对照表明，区域化分组是控制跨国旅行与时区成本的关键，而本方案的优化方向更偏向休息与容量。模型的关键价值不在于声称全局或隐藏测试最优，而在于每个数字都能由源数据、代码、日志和独立验收复现。
+
+\section*{AI工具使用声明}
+本参赛队在竞赛过程中使用了AI工具，主要用于审题辅助、建模方案讨论、代码编写与调试、数据核验、图表生成和论文文字整理，详细使用情况见支撑材料。所有模型公式、程序输出、求解日志、约束和论文结论均由参赛队逐项人工审查与核实。
+
+\printbibliography
+
+\ModelAppendix
+\section{支撑材料文件列表}
+\footnotesize
+\begin{longtable}{p{0.34\textwidth}p{0.57\textwidth}}
+\toprule
+路径 & 用途\\
+\midrule
+\endfirsthead
+\toprule 路径 & 用途\\ \midrule
+\endhead
+\path{src/c_contest_q1/*.py} & Q1--Q4特征、评价、模拟与COPT模型完整源程序\\
+\path{scripts/run_q1_demo.py} & Q1训练、验证与正式预测入口\\
+\path{scripts/run_q2_demo.py} & Q2确定性可行基线入口\\
+\path{scripts/run_q2_copt.py} & Q2完整受限候选$Z_2$ COPT入口\\
+\path{scripts/run_q3_copt.py} & Q3静态、动态及可行下界三COPT模型入口\\
+\path{scripts/collect_q4_openfootball.py} & Q4公开赛程解析与来源固化\\
+\path{scripts/run_analysis_campaign.py} & 权重扰动、模拟收敛和动态对比\\
+\path{scripts/validate_deliverables.py} & 六份模板、单位、约束、来源和目标对账验收\\
+\path{outputs/q2/copt/solver.log} & Q2 COPT版本、规模、状态、gap和目标日志\\
+\path{outputs/q3/copt/solver.log} & Q3静态和动态COPT日志\\
+\path{outputs/validation/deliverable_validation.json} & 最终14项验收与输出SHA-256\\
+\path{research/q4/} & OpenFootball原始赛程、场馆快照和来源说明\\
+AI工具使用详情.pdf & 按竞赛规范披露AI工具、目的、过程、修改和核验\\
+\bottomrule
+\end{longtable}
+\normalsize
+
+\section{运行环境与复现顺序}
+操作系统为Windows，CPU为Intel Core i9-14900HX。Q1、Q4与分析环境使用NumPy、Pandas、scikit-learn和Matplotlib；Q2/Q3使用Python 3.12与COPT 8.0.6非商业评估模式。随机种子统一为20260814。按下列顺序运行：
+\begin{lstlisting}[language=bash,caption={端到端复现命令}]
+.\.venv-demo\Scripts\python.exe scripts\run_q1_demo.py
+.\.venv-demo\Scripts\python.exe scripts\run_q2_demo.py
+.\.venv\Scripts\python.exe scripts\run_q2_copt.py
+.\.venv\Scripts\python.exe scripts\run_q3_copt.py
+.\.venv-demo\Scripts\python.exe scripts\collect_q4_openfootball.py
+.\.venv-demo\Scripts\python.exe scripts\run_q4_comparison.py
+.\.venv-demo\Scripts\python.exe scripts\run_analysis_campaign.py
+.\.venv-demo\Scripts\python.exe scripts\validate_deliverables.py
+\end{lstlisting}
+
+\section{COPT应用证据与声明边界}
+Q2求解日志记录840个二元变量、865个约束、最优目标0.458163650和0.0000\% gap；独立评估器返回相同目标。Q3静态、动态和可行下界三个模型各有1623个二元变量、48个约束，均为0.0000\% gap；第三个模型在同一每日约束下最小化同一更新目标，给出$Z_3$可行区间$[4.7963,6.6522]$。评估版明确输出2000变量/约束限制，因此Q2采用可审计候选分解。本文只主张受限集合内整数最优，并完整提交COPT代码、日志、元数据、三份选择表和独立验收结果。
+
+\section{核心算法伪代码}
+\begin{algorithm}[H]
+\KwIn{前两轮结果、Q2第三轮固定赛程、基础泊松均值}
+\KwOut{晋级概率、风险、动态资源配置}
+计算48队状态$s_t$与伤病$h_t$，一次性更新24场$\lambda$\;
+\For{$r=1,\ldots,20000$}{
+  同时抽取24场双方进球\;
+  更新各组积分、净胜球、进球数\;
+  选每组前二与最好的8个第三名，完全同分用等比例随机键\;
+}
+由同一模拟样本计算晋级概率、条件晋级概率和两类风险\;
+构造静态/动态共同资源候选，删除违反88\%保护的候选\;
+COPT先求静态方案，固定决策后在更新环境重评\;
+COPT在相同容量、预算和边界下求动态方案\;
+独立校验24行输出、32个晋级名额和每日资源约束\;
+\caption{统一信息截面的Q3模拟与双模型优化}
+\end{algorithm}
+
+\clearpage
+\input{source_appendix.tex}
+
+\end{document}

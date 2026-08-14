@@ -1,0 +1,2 @@
+PASS: all six hard-constraint groups recomputed from CSV.
+P2 score uses fixed eligible-candidate min-max ranges for ticket, broadcast, operation cost, and travel.

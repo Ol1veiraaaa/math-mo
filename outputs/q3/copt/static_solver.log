@@ -1,0 +1,52 @@
+Setting log file to outputs/q3/copt/static_solver.log
+No license found. The size is limited to 2000 variables and 2000 constraints
+Please apply for a license from www.shanshu.ai/copt
+
+Model fingerprint: 2ebb97db
+
+Using Cardinal Optimizer v8.0.6 on Windows (25H2 Build 26200 - x86_64)
+The CPU model is Intel(R) Core(TM) i9-14900HX
+Hardware has 24 physical cores and 32 logical cores. Using instruction set X86_AVX2 (10)
+Maximizing a MIP problem
+
+The original problem has:
+    48 rows, 1623 columns and 5413 non-zero elements
+    1623 binaries
+
+Starting the MIP solver with 32 threads and 64 tasks
+
+Presolving the problem
+
+The presolved problem has:
+    7 rows, 24 columns and 68 non-zero elements
+    24 binaries
+
+Problem info:
+    Range of matrix coefficients:    [1e+00,1e+01]
+    Range of rhs coefficients:       [1e+00,7e+01]
+    Range of bound coefficients:     [1e+00,1e+00]
+    Range of cost coefficients:      [2e-04,7e-02]
+    Density of cost:                     100.0%
+
+     Nodes    Active  LPit/n  IntInf     BestBound  BestSolution     Gap   Time
+         0         1      --       0  7.262909e+00            --     Inf  0.06s
+H        0         1      --       0  7.262909e+00  6.502078e+00  10.48%  0.06s
+H        0         1      --       0  7.262909e+00  6.560912e+00  9.666%  0.06s
+H        0         1      --       0  7.262909e+00  6.590397e+00  9.260%  0.06s
+*        0         1      --       0  6.679789e+00  6.679789e+00  0.000%  0.07s
+         0         1      --       0  6.679789e+00  6.679789e+00  0.000%  0.07s
+         1         0     0.0       0  6.679789e+00  6.679789e+00  0.000%  0.07s
+         1         0     0.0       0  6.679789e+00  6.679789e+00  0.000%  0.07s
+
+Best solution   : 6.679789185
+Best bound      : 6.679789185
+Best gap        : 0.0000%
+Solve time      : 0.07
+Solve node      : 1
+MIP status      : solved
+Solution status : integer optimal (relative gap limit 0.0001)
+
+Violations      :     absolute     relative
+    bounds      :            0            0
+    rows        :            0            0
+    integrality :            0

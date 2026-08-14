@@ -1,0 +1,91 @@
+{
+  "q2": {
+    "fifa_validation_errors": [
+      "security-ineligible venue for GD03",
+      "security-ineligible venue for GD04",
+      "security-ineligible venue for GH05",
+      "security-ineligible venue for GJ06",
+      "broadcast capacity violated: S164",
+      "broadcast capacity violated: S173",
+      "third-round high-security capacity violated on 2026-06-25",
+      "third-round high-security capacity violated on 2026-06-26"
+    ],
+    "fifa_validation_ok": false,
+    "fifa_repaired_matches": 4,
+    "objective_fifa_repaired": 0.33917188360328854,
+    "objective_copt": 0.458163650373169,
+    "objective_demo": 0.3187898737709609,
+    "raw_fifa": {
+      "raw_T": 285719190.0,
+      "raw_B": 256233785.89633763,
+      "raw_U": 33.2234,
+      "raw_H": 46.0583,
+      "raw_C": 55.81,
+      "raw_D": 16.312848475157224,
+      "raw_F": 0.8333333333333333,
+      "raw_R": 0.4128381044429841
+    },
+    "raw_copt": {
+      "raw_T": 285910470.0,
+      "raw_B": 338233577.0607878,
+      "raw_U": 33.2234,
+      "raw_H": 46.0583,
+      "raw_C": 54.915000000000006,
+      "raw_D": 16.197189370639812,
+      "raw_F": 0.6666666666666666,
+      "raw_R": 0.40748650477539106
+    },
+    "norm_fifa": {
+      "norm_T": 0.9524425764249139,
+      "norm_B": 0.48191055113121317,
+      "norm_U": 0.4614361111111111,
+      "norm_H": 0.6396986111111111,
+      "norm_C": 0.6910123360093988,
+      "norm_D": 0.4401023572149973,
+      "norm_F": 0.8333333333333333,
+      "norm_R": 0.4128381044429841
+    },
+    "norm_copt": {
+      "norm_T": 1.0,
+      "norm_B": 0.8594006656401432,
+      "norm_U": 0.4614361111111111,
+      "norm_H": 0.6396986111111111,
+      "norm_C": 0.6734873702760917,
+      "norm_D": 0.4241906285934515,
+      "norm_F": 0.6666666666666666,
+      "norm_R": 0.40748650477539106
+    },
+    "venue_agreement": 0.06944444444444445,
+    "slot_agreement": 0.08333333333333333,
+    "date_agreement": 0.375,
+    "slot_gap_hours_mean": 0.7152777777777778,
+    "slot_gap_hours_max": 3.0
+  },
+  "q3": {
+    "standings_points_equal_share": 0.20833333333333334,
+    "standings_points_delta_mean_abs": 1.7083333333333333,
+    "standings_points_correlation": 0.447494596844367,
+    "state_s_correlation": 0.6258650677561622,
+    "p_correlation": 0.368088511831489,
+    "p_mae": 0.28598125,
+    "brier_synthetic": 0.24493260062500002,
+    "brier_actual_based": 0.10831327489583333,
+    "hit_rate_synthetic": 0.6666666666666666,
+    "hit_rate_actual_based": 0.8333333333333334,
+    "group_top2_exact_matches_synthetic": 7,
+    "group_top2_exact_matches_actual_based": 10,
+    "p_vs_points_spearman_synthetic": 0.6461231792961568,
+    "p_vs_points_spearman_actual_based": 0.8947635410448243
+  },
+  "q1": {
+    "expected_vs_actual_goals_corr_a": 0.4553847400233398,
+    "expected_vs_actual_goals_corr_b": 0.40506543305943227,
+    "expected_goals_mae": 0.9394444444444445,
+    "direction_accuracy_decided": 0.8461538461538461,
+    "direction_accuracy_decided_n": 52,
+    "draws": 20,
+    "elo_direction_accuracy_decided": 0.8269230769230769,
+    "margin_correlation": 0.5982434818310288,
+    "viewers_vs_goals_spearman": 0.04897549268393037
+  }
+}

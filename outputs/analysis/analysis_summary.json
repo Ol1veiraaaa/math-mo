@@ -1,0 +1,36 @@
+{
+  "execution_envelope": {
+    "processor": "Intel Core i9-14900HX",
+    "q3_solver": "COPT 8.0.6 evaluation mode, 2000-variable MIP limit",
+    "random_seed": 20260814
+  },
+  "q2_weight_robustness": {
+    "samples": 10000,
+    "copt_win_rate": 1.0,
+    "difference_min": 0.10572910265439556,
+    "difference_p05": 0.11767741309005532,
+    "difference_median": 0.13962580081851445,
+    "difference_p95": 0.16072560198088884,
+    "difference_max": 0.17650464610956618
+  },
+  "q3_simulation_convergence": {
+    "reference_simulations": 50000,
+    "probability_mae_20000_vs_50000": 0.0014162499999999956,
+    "probability_max_abs_20000_vs_50000": 0.008529999999999927,
+    "collusion_risk_mae_20000_vs_50000": 0.00035753958919445373
+  },
+  "q3_resource_comparison": {
+    "matches_with_changed_decision": 10,
+    "changed_decision_rate": 0.4166666666666667,
+    "matches_with_positive_contribution_change": 7,
+    "matches_with_negative_contribution_change": 3,
+    "mean_match_improvement_rate": -0.04258896701287689,
+    "total_static_updated_value": 6.6327957655273675,
+    "total_dynamic_value": 6.65219449823598,
+    "total_improvement_rate": 0.002924669082897704,
+    "maximum_improvement_match": "GL05",
+    "maximum_improvement_rate": 0.2108862918905775,
+    "minimum_improvement_match": "GA05",
+    "minimum_improvement_rate": -0.959037958615528
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "solver": "COPT 8.0.6",
+  "license_mode": "non-commercial evaluation, 2000-variable/constraint limit",
+  "candidate_count": 824,
+  "status": 1,
+  "mip_objective": 0.45816365037316586,
+  "solve_evidence": {
+    "rows": 865,
+    "columns": 844,
+    "binary_variables": 840,
+    "best_bound": 0.45816365037316586,
+    "relative_gap": 0.0,
+    "solve_time_seconds": 0.4910011291503906
+  },
+  "full_p2_score": {
+    "raw_T": 285910470.0,
+    "raw_B": 338233577.0607878,
+    "raw_U": 33.2234,
+    "raw_H": 46.0583,
+    "raw_C": 54.915000000000006,
+    "raw_D": 16.197189370639812,
+    "raw_F": 0.6666666666666666,
+    "raw_R": 0.40748650477539106,
+    "norm_T": 1.0,
+    "norm_B": 0.8594006656401432,
+    "norm_U": 0.4614361111111111,
+    "norm_H": 0.6396986111111111,
+    "norm_C": 0.6734873702760917,
+    "norm_D": 0.4241906285934515,
+    "norm_F": 0.6666666666666666,
+    "norm_R": 0.40748650477539106,
+    "objective": 0.458163650373169
+  }
+}

@@ -1,0 +1,49 @@
+team,p_synthetic,p_actual_based,actually_qualified,group_id,rank,points,gf,ga,actual_points,synthetic_points
+Mexico,1.0,1.0,True,A,1,9,6,0,6,6
+Czechia,1.0,0.12525,False,A,4,1,2,6,1,4
+South Africa,0.2312,0.16525,True,A,2,4,2,3,1,1
+South Korea,0.53105,0.9594,False,A,3,3,2,3,3,0
+Canada,0.35265,1.0,True,B,2,4,8,3,4,2
+Switzerland,1.0,1.0,True,B,1,7,7,3,4,6
+Bosnia and Herzegovina,0.59925,0.39575,True,B,3,4,5,6,1,1
+Qatar,0.3202,0.33465,False,B,4,1,2,10,1,1
+Brazil,1.0,1.0,True,C,1,7,7,1,4,4
+Scotland,0.07865,0.8311,False,C,3,3,1,4,3,1
+Morocco,0.9629,1.0,True,C,2,7,6,3,4,3
+Haiti,0.2131,0.00725,False,C,4,0,2,8,0,2
+United States,1.0,1.0,True,D,1,6,8,4,6,4
+Turkey,1.0,0.071,False,D,4,3,3,5,0,4
+Paraguay,0.31705,0.8314,True,D,3,4,2,4,3,0
+Australia,0.6272,0.92965,True,D,2,4,2,2,3,2
+Germany,1.0,1.0,True,E,1,6,10,4,6,4
+Ecuador,0.95175,0.16715,True,E,3,4,2,2,1,3
+Curacao,0.0024,0.12195,False,E,4,1,1,9,1,0
+Ivory Coast,1.0,0.96515,True,E,2,6,4,2,3,4
+Netherlands,1.0,1.0,True,F,1,7,10,4,4,6
+Tunisia,0.06715,0.0,False,F,4,0,2,12,0,1
+Japan,0.9381,1.0,True,F,2,5,7,3,4,3
+Sweden,0.31875,0.96595,True,F,3,4,7,7,3,1
+Belgium,1.0,0.95215,True,G,1,5,6,2,2,6
+New Zealand,0.78465,0.04835,False,G,4,1,4,10,1,3
+Egypt,0.80785,1.0,True,G,2,5,5,3,4,3
+Iran,0.15605,0.66555,False,G,3,3,3,3,2,0
+Spain,1.0,1.0,True,H,1,7,5,0,4,6
+Uruguay,0.9845,0.53925,False,H,3,2,3,4,2,3
+Cape Verde,0.02295,0.65095,True,H,2,3,2,2,2,0
+Saudi Arabia,0.9638,0.3565,False,H,4,2,1,5,1,3
+France,1.0,1.0,True,I,1,9,10,2,6,4
+Norway,1.0,1.0,True,I,2,6,8,7,6,4
+Senegal,0.88875,0.6263,True,I,3,3,8,6,0,2
+Iraq,0.05665,0.06935,False,I,4,0,1,12,0,0
+Argentina,1.0,1.0,True,J,1,9,8,1,6,6
+Jordan,1.0,0.01315,False,J,4,0,3,8,0,6
+Algeria,0.22295,0.77415,True,J,3,4,5,7,3,0
+Austria,0.50275,0.97565,True,J,2,4,6,6,3,0
+Portugal,1.0,1.0,True,K,2,5,6,1,4,6
+Colombia,1.0,1.0,True,K,1,7,4,1,6,6
+DR Congo,0.2891,0.33595,True,K,3,4,4,3,1,0
+Uzbekistan,0.1275,0.15175,False,K,4,0,2,11,0,0
+England,1.0,1.0,True,L,1,7,6,2,4,4
+Panama,0.582,0.0066,False,L,4,0,0,4,0,3
+Croatia,1.0,0.9635,True,L,2,6,5,5,3,4
+Ghana,0.0991,0.99995,True,L,3,4,2,2,4,0

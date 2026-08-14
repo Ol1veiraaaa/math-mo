@@ -1,0 +1,17 @@
+city,venue,country,utc_offset,capacity,latitude,longitude
+Vancouver,BC Place,Canada,-7,54000,49.276666666666664,-123.11194444444443
+Seattle,Lumen Field,United States,-7,69000,47.59527777777778,-122.33166666666666
+San Francisco Bay Area (Santa Clara),Levi's Stadium,United States,-7,71000,37.403,-121.97
+Los Angeles (Inglewood),SoFi Stadium,United States,-7,70000,33.953,-118.339
+Guadalajara (Zapopan),Estadio Akron,Mexico,-6,48000,20.68166666666667,-103.46277777777777
+Mexico City,Estadio Azteca,Mexico,-6,83000,19.303055555555556,-99.15055555555556
+Monterrey (Guadalupe),Estadio BBVA,Mexico,-6,53500,25.66916666666667,-100.24444444444444
+Houston,NRG Stadium,United States,-5,72000,29.684722222222224,-95.41083333333334
+Dallas (Arlington),AT&T Stadium,United States,-5,94000,32.74777777777778,-97.09277777777777
+Kansas City,Arrowhead Stadium,United States,-5,73000,39.04888888888889,-94.48388888888888
+Atlanta,Mercedes-Benz Stadium,United States,-4,75000,33.75555555555555,-84.4
+Miami (Miami Gardens),Hard Rock Stadium,United States,-4,65000,25.958055555555553,-80.2388888888889
+Toronto,BMO Field,Canada,-4,45000,43.63333333333333,-79.41861111111112
+Boston (Foxborough),Gillette Stadium,United States,-4,65000,42.091,-71.264
+Philadelphia,Lincoln Financial Field,United States,-4,69000,39.90083333333333,-75.1675
+New York/New Jersey (East Rutherford),MetLife Stadium,United States,-4,82500,40.81352777777777,-74.0743611111111

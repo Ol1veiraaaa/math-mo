@@ -1,0 +1,25 @@
+{
+  "features": [
+    "prob_low",
+    "prob_mid",
+    "prob_high",
+    "prob_max",
+    "prob_entropy",
+    "competition",
+    "stage",
+    "elo_mean",
+    "elo_abs_diff",
+    "rank_mean",
+    "fan_sum",
+    "fan_max",
+    "star_sum",
+    "star_max",
+    "log_market_sum",
+    "same_confederation",
+    "confederation_pair",
+    "timezone_region_pair"
+  ],
+  "target_unit": "millions_of_people",
+  "n_training_rows": 560,
+  "n_hidden_test_rows": 140
+}

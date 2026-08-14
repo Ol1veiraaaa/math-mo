@@ -1,0 +1,16 @@
+{
+  "team_id": "XXX",
+  "placeholder_name": true,
+  "size_limit_bytes": 20971520,
+  "files": {
+    "XXX_参赛论文.pdf": {
+      "bytes": 1408303,
+      "sha256": "06050408f3f04bc39f7cd3b28889cea0101e5b4b3dfa876d5c8887a50d186a6d"
+    },
+    "XXX_支撑材料.zip": {
+      "bytes": 1498877,
+      "sha256": "fefb76a1e952556f8708eae91eadd6be8f11340bbfc8ee997b4d1e73a05698f5"
+    }
+  },
+  "support_archive_members": 87
+}

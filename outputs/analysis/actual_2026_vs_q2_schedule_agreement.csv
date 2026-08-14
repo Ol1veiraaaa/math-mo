@@ -1,0 +1,73 @@
+match_id,group_id,team_a,team_b,venue_id,slot_id,reference_date,slot_gap_hours,actual_venue,actual_city,copt_venue_id,copt_slot_id,copt_reference_date,demo_venue_id,demo_slot_id,venue_agree_copt,slot_agree_copt,date_agree_copt,venue_repaired_for_feasibility
+GA01,A,Mexico,South Africa,V08,S012,2026-06-11,0.0,Estadio Azteca,Mexico City,V01,S014,2026-06-11,V01,S011,False,False,True,False
+GA02,A,South Korea,Czechia,V04,S014,2026-06-11,1.0,Estadio Akron,Guadalajara (Zapopan),V02,S011,2026-06-11,V02,S011,False,False,True,False
+GA03,A,Mexico,South Korea,V04,S084,2026-06-18,0.0,Estadio Akron,Guadalajara (Zapopan),V09,S081,2026-06-18,V09,S082,False,False,True,False
+GA04,A,South Africa,Czechia,V01,S081,2026-06-18,0.0,Mercedes-Benz Stadium,Atlanta,V10,S084,2026-06-18,V10,S082,False,False,True,False
+GA05,A,Mexico,Czechia,V08,S144,2026-06-24,0.0,Estadio Azteca,Mexico City,V01,S151,2026-06-25,V01,S152,False,False,False,False
+GA06,A,South Africa,South Korea,V10,S144,2026-06-24,0.0,Estadio BBVA,Monterrey (Guadalupe),V02,S151,2026-06-25,V02,S152,False,False,False,False
+GB01,B,Canada,Bosnia and Herzegovina,V15,S022,2026-06-12,0.0,BMO Field,Toronto,V03,S014,2026-06-11,V03,S012,False,False,False,False
+GB02,B,Qatar,Switzerland,V13,S032,2026-06-13,0.0,Levi's Stadium,San Francisco Bay Area (Santa Clara),V04,S011,2026-06-11,V04,S012,False,False,False,False
+GB03,B,Canada,Qatar,V16,S083,2026-06-18,0.0,BC Place,Vancouver,V11,S081,2026-06-18,V11,S083,False,False,True,False
+GB04,B,Bosnia and Herzegovina,Switzerland,V07,S082,2026-06-18,0.0,SoFi Stadium,Los Angeles (Inglewood),V12,S081,2026-06-18,V12,S083,False,False,True,False
+GB05,B,Canada,Switzerland,V16,S142,2026-06-24,0.0,BC Place,Vancouver,V03,S151,2026-06-25,V03,S153,False,False,False,False
+GB06,B,Bosnia and Herzegovina,Qatar,V14,S142,2026-06-24,0.0,Lumen Field,Seattle,V04,S154,2026-06-25,V04,S153,False,False,False,False
+GC01,C,Brazil,Morocco,V11,S033,2026-06-13,0.0,MetLife Stadium,New York/New Jersey (East Rutherford),V08,S021,2026-06-12,V07,S022,False,False,False,False
+GC02,C,Haiti,Scotland,V02,S034,2026-06-13,0.0,Gillette Stadium,Boston (Foxborough),V05,S021,2026-06-12,V05,S022,False,False,False,False
+GC03,C,Brazil,Haiti,V12,S094,2026-06-19,0.5,Lincoln Financial Field,Philadelphia,V13,S091,2026-06-19,V13,S091,False,False,True,False
+GC04,C,Morocco,Scotland,V02,S093,2026-06-19,0.0,Gillette Stadium,Boston (Foxborough),V08,S091,2026-06-19,V14,S091,False,False,True,False
+GC05,C,Brazil,Scotland,V09,S143,2026-06-24,0.0,Hard Rock Stadium,Miami (Miami Gardens),V05,S164,2026-06-26,V05,S161,False,False,False,False
+GC06,C,Morocco,Haiti,V01,S143,2026-06-24,0.0,Mercedes-Benz Stadium,Atlanta,V06,S164,2026-06-26,V06,S161,False,False,False,False
+GD01,D,United States,Paraguay,V07,S024,2026-06-12,0.0,SoFi Stadium,Los Angeles (Inglewood),V08,S024,2026-06-12,V08,S023,False,True,True,False
+GD02,D,Australia,Turkey,V16,S034,2026-06-13,3.0,BC Place,Vancouver,V09,S021,2026-06-12,V09,S023,False,False,False,False
+GD03,D,United States,Australia,V14,S092,2026-06-19,0.0,Lumen Field,Seattle,V08,S094,2026-06-19,V03,S092,False,False,True,True
+GD04,D,Paraguay,Turkey,V13,S094,2026-06-19,2.0,Levi's Stadium,San Francisco Bay Area (Santa Clara),V07,S094,2026-06-19,V07,S092,False,True,True,True
+GD05,D,United States,Turkey,V07,S154,2026-06-25,1.0,SoFi Stadium,Los Angeles (Inglewood),V07,S161,2026-06-26,V07,S162,True,False,False,False
+GD06,D,Paraguay,Australia,V13,S154,2026-06-25,1.0,Levi's Stadium,San Francisco Bay Area (Santa Clara),V08,S161,2026-06-26,V08,S162,False,False,False,False
+GE01,E,Germany,Curacao,V05,S041,2026-06-14,1.0,NRG Stadium,Houston,V06,S031,2026-06-13,V06,S032,False,False,False,False
+GE02,E,Ivory Coast,Ecuador,V12,S043,2026-06-14,1.0,Lincoln Financial Field,Philadelphia,V10,S034,2026-06-13,V10,S032,False,False,False,False
+GE03,E,Germany,Ivory Coast,V15,S102,2026-06-20,1.0,BMO Field,Toronto,V15,S101,2026-06-20,V15,S101,True,False,True,False
+GE04,E,Curacao,Ecuador,V06,S104,2026-06-20,1.0,Arrowhead Stadium,Kansas City,V16,S101,2026-06-20,V16,S101,False,False,True,False
+GE05,E,Germany,Ecuador,V11,S152,2026-06-25,1.0,MetLife Stadium,New York/New Jersey (East Rutherford),V09,S171,2026-06-27,V09,S172,False,False,False,False
+GE06,E,Curacao,Ivory Coast,V12,S152,2026-06-25,1.0,Lincoln Financial Field,Philadelphia,V10,S171,2026-06-27,V10,S172,False,False,False,False
+GF01,F,Netherlands,Japan,V03,S042,2026-06-14,1.0,AT&T Stadium,Dallas (Arlington),V11,S034,2026-06-13,V11,S033,False,False,False,False
+GF02,F,Sweden,Tunisia,V10,S044,2026-06-14,1.0,Estadio BBVA,Monterrey (Guadalupe),V12,S034,2026-06-13,V12,S033,False,False,False,False
+GF03,F,Netherlands,Sweden,V05,S101,2026-06-20,1.0,NRG Stadium,Houston,V01,S104,2026-06-20,V01,S102,False,False,True,False
+GF04,F,Japan,Tunisia,V10,S104,2026-06-20,3.0,Estadio BBVA,Monterrey (Guadalupe),V02,S104,2026-06-20,V02,S102,False,True,True,False
+GF05,F,Netherlands,Tunisia,V06,S153,2026-06-25,1.0,Arrowhead Stadium,Kansas City,V11,S174,2026-06-27,V11,S173,False,False,False,False
+GF06,F,Japan,Sweden,V03,S153,2026-06-25,1.0,AT&T Stadium,Dallas (Arlington),V03,S174,2026-06-27,V03,S173,True,False,False,False
+GG01,G,Belgium,Egypt,V14,S052,2026-06-15,0.0,Lumen Field,Seattle,V13,S044,2026-06-14,V13,S041,False,False,False,False
+GG02,G,Iran,New Zealand,V07,S054,2026-06-15,0.0,SoFi Stadium,Los Angeles (Inglewood),V14,S041,2026-06-14,V14,S041,False,False,False,False
+GG03,G,Belgium,Iran,V07,S112,2026-06-21,0.0,SoFi Stadium,Los Angeles (Inglewood),V04,S114,2026-06-21,V04,S111,False,False,True,False
+GG04,G,Egypt,New Zealand,V16,S114,2026-06-21,0.0,BC Place,Vancouver,V05,S111,2026-06-21,V05,S111,False,False,True,False
+GG05,G,Belgium,New Zealand,V16,S164,2026-06-26,2.0,BC Place,Vancouver,V12,S184,2026-06-28,V12,S181,False,False,False,False
+GG06,G,Egypt,Iran,V14,S164,2026-06-26,2.0,Lumen Field,Seattle,V13,S184,2026-06-28,V13,S181,False,False,False,False
+GH01,H,Spain,Cape Verde,V01,S051,2026-06-15,0.0,Mercedes-Benz Stadium,Atlanta,V15,S041,2026-06-14,V15,S042,False,False,False,False
+GH02,H,Saudi Arabia,Uruguay,V09,S053,2026-06-15,0.0,Hard Rock Stadium,Miami (Miami Gardens),V08,S044,2026-06-14,V16,S042,False,False,False,False
+GH03,H,Spain,Saudi Arabia,V01,S111,2026-06-21,0.0,Mercedes-Benz Stadium,Atlanta,V06,S114,2026-06-21,V06,S112,False,False,True,False
+GH04,H,Cape Verde,Uruguay,V09,S113,2026-06-21,0.0,Hard Rock Stadium,Miami (Miami Gardens),V03,S114,2026-06-21,V08,S112,False,False,True,False
+GH05,H,Spain,Uruguay,V04,S164,2026-06-26,1.0,Estadio Akron,Guadalajara (Zapopan),V07,S184,2026-06-28,V07,S182,False,False,False,True
+GH06,H,Cape Verde,Saudi Arabia,V05,S164,2026-06-26,1.0,NRG Stadium,Houston,V03,S181,2026-06-28,V14,S182,False,False,False,False
+GI01,I,France,Senegal,V11,S062,2026-06-16,0.0,MetLife Stadium,New York/New Jersey (East Rutherford),V01,S051,2026-06-15,V01,S052,False,False,False,False
+GI02,I,Iraq,Norway,V02,S063,2026-06-16,0.0,Gillette Stadium,Boston (Foxborough),V02,S051,2026-06-15,V02,S052,True,False,False,False
+GI03,I,France,Iraq,V12,S123,2026-06-22,1.0,Lincoln Financial Field,Philadelphia,V09,S124,2026-06-22,V09,S122,False,False,True,False
+GI04,I,Senegal,Norway,V11,S124,2026-06-22,1.0,MetLife Stadium,New York/New Jersey (East Rutherford),V10,S124,2026-06-22,V10,S122,False,True,True,False
+GI05,I,France,Norway,V02,S162,2026-06-26,0.0,Gillette Stadium,Boston (Foxborough),V15,S191,2026-06-29,V15,S192,False,False,False,False
+GI06,I,Senegal,Iraq,V15,S162,2026-06-26,0.0,BMO Field,Toronto,V16,S194,2026-06-29,V16,S192,False,False,False,False
+GJ01,J,Argentina,Algeria,V06,S064,2026-06-16,0.0,Arrowhead Stadium,Kansas City,V08,S054,2026-06-15,V03,S053,False,False,False,False
+GJ02,J,Austria,Jordan,V13,S064,2026-06-16,3.0,Levi's Stadium,San Francisco Bay Area (Santa Clara),V04,S054,2026-06-15,V04,S053,False,False,False,False
+GJ03,J,Argentina,Austria,V03,S121,2026-06-22,1.0,AT&T Stadium,Dallas (Arlington),V11,S121,2026-06-22,V11,S123,False,True,True,False
+GJ04,J,Algeria,Jordan,V13,S124,2026-06-22,2.0,Levi's Stadium,San Francisco Bay Area (Santa Clara),V12,S121,2026-06-22,V12,S123,False,False,True,False
+GJ05,J,Argentina,Jordan,V03,S174,2026-06-27,1.0,AT&T Stadium,Dallas (Arlington),V01,S191,2026-06-29,V01,S193,False,False,False,False
+GJ06,J,Algeria,Austria,V06,S174,2026-06-27,1.0,Arrowhead Stadium,Kansas City,V02,S191,2026-06-29,V02,S193,False,False,False,True
+GK01,K,Portugal,DR Congo,V05,S071,2026-06-17,1.0,NRG Stadium,Houston,V05,S061,2026-06-16,V05,S061,True,False,False,False
+GK02,K,Uzbekistan,Colombia,V08,S074,2026-06-17,1.0,Estadio Azteca,Mexico City,V06,S061,2026-06-16,V06,S061,False,False,False,False
+GK03,K,Portugal,Uzbekistan,V05,S131,2026-06-23,1.0,NRG Stadium,Houston,V13,S131,2026-06-23,V13,S132,False,True,True,False
+GK04,K,DR Congo,Colombia,V04,S134,2026-06-23,1.0,Estadio Akron,Guadalajara (Zapopan),V14,S131,2026-06-23,V14,S132,False,False,True,False
+GK05,K,Portugal,Colombia,V09,S173,2026-06-27,1.5,Hard Rock Stadium,Miami (Miami Gardens),V03,S204,2026-06-30,V04,S201,False,False,False,False
+GK06,K,DR Congo,Uzbekistan,V01,S173,2026-06-27,1.5,Mercedes-Benz Stadium,Atlanta,V05,S204,2026-06-30,V05,S201,False,False,False,False
+GL01,L,England,Croatia,V03,S072,2026-06-17,1.0,AT&T Stadium,Dallas (Arlington),V07,S064,2026-06-16,V07,S062,False,False,False,False
+GL02,L,Ghana,Panama,V15,S073,2026-06-17,1.0,BMO Field,Toronto,V08,S064,2026-06-16,V08,S062,False,False,False,False
+GL03,L,England,Ghana,V02,S132,2026-06-23,1.0,Gillette Stadium,Boston (Foxborough),V15,S131,2026-06-23,V15,S133,False,False,True,False
+GL04,L,Croatia,Panama,V15,S133,2026-06-23,1.0,BMO Field,Toronto,V03,S134,2026-06-23,V16,S133,False,False,True,False
+GL05,L,England,Panama,V11,S173,2026-06-27,1.0,MetLife Stadium,New York/New Jersey (East Rutherford),V06,S201,2026-06-30,V06,S202,False,False,False,False
+GL06,L,Croatia,Ghana,V12,S173,2026-06-27,1.0,Lincoln Financial Field,Philadelphia,V03,S201,2026-06-30,V08,S202,False,False,False,False
